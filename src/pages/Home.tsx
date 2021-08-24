@@ -5,23 +5,20 @@ import googleIconImg from '../assets/images/google-icon.svg'
 
 import '../styles/auth.scss';
 import { Button } from '../components/Button';
-import { firebase } from '../services/firebase';
-//all imports is inside react
+import {useAuth} from '../hooks/useAuth';
 
 export function Home(){
 
     const history = useHistory();
+
+    const {user, sigInWithGoogle} = useAuth();
  
-    function handleCreateRoom (){
-        var provider = new firebase.auth.GoogleAuthProvider();
-        
-        firebase.auth().signInWithPopup(provider).then(result => {
-            console.log(result);
 
-            history.push('/rooms/new');
-        })
-
-       // history.push('/rooms/new');
+    async function handleCreateRoom (){
+      if(!user){
+          await sigInWithGoogle
+      }
+      history.push('/rooms/new')
     }
 
 
@@ -33,6 +30,7 @@ export function Home(){
                 <p>Tira as duvidas da sua audiência em tempo real</p>
             </aside>
             <main > 
+                {/* <h1>{value}</h1> */}
                 <div className="main-content">
 
                 <div>

@@ -4,9 +4,13 @@ import logoImg from '../assets/images/logo.svg';
 
 import '../styles/auth.scss';
 import { Button } from '../components/Button';
+import { useAuth } from '../hooks/useAuth';
+
+//import {TesteContext} from '../App';
 //all imports is inside react
 
 export function NewRoom(){
+ const {user} = useAuth();
     return (
         <div id='page-auth'>
             <aside>
@@ -16,11 +20,12 @@ export function NewRoom(){
             </aside>
             <main > 
                 <div className="main-content">
-
+                <h1>{user?.name}</h1>
                 <div>
                     <img src={logoImg} alt="Letmeask" />
                     <h2>Criar uma nova sala</h2>
                 </div>
+              
                 <form>
                     <input 
                     type="text" 
